@@ -7,22 +7,40 @@ import gtk
 
 from commands import getoutput
 from os import system
-user = getoutput("logname")
+
+#nombre de usuario
+usern = getoutput("logname")
 
 #Archivos con la configuración
-if getoutput("ls ~/.freelogoquiz") == "ls: no se puede acceder a /home/" + user + "/.freelogoquiz: No existe el archivo o el directorio":
-	system("mkdir ~/.freelogoquiz")
-if getoutput("ls ~/.freelogoquiz") == "":
-	system("echo \"0\" >> ~/.freelogoquiz/nivel1")
-	system("echo \"0\" >> ~/.freelogoquiz/nivel2")
-	system("echo \"0\" >> ~/.freelogoquiz/nivel3")
-	system("echo \"0\" >> ~/.freelogoquiz/nivel4")
+if getoutput("mkdir ~/.config/freelogoquiz") == "":
+	num = 0
+	while num < 20:
+		system("echo 0 >> ~/.config/freelogoquiz/n1.txt")
+		num = num + 1
+	num = 0
+	while num < 20:
+		system("echo 0 >> ~/.config/freelogoquiz/n2.txt")
+		num = num + 1
+	num = 0
+	while num < 20:
+		system("echo 0 >> ~/.config/freelogoquiz/n3.txt")
+		num = num + 1
+	num = 0
+	while num < 20:
+		system("echo 0 >> ~/.config/freelogoquiz/n4.txt")
+		num = num + 1
 
-completados1 = system("cat ~/.freelogoquiz/nivel1")
-completados2 = system("cat ~/.freelogoquiz/nivel2")
-completados3 = system("cat ~/.freelogoquiz/nivel3")
-completados4 = system("cat ~/.freelogoquiz/nivel4")
+def completados(nivel):
+	arch = open("/home/" + usern + "/.config/freelogoquiz/n" + str(nivel) + ".txt")
+	tmp = arch.read()
+	arch.close()
+	tmp = tmp.split("\n")
+	completados = 0
+	for i in tmp:
+		if i == "1":
+			completados = completados + 1
 
+	return completados
 
 class Menu:
 	def delete_event(self, widget, event, data=None):
@@ -30,8 +48,12 @@ class Menu:
 		return False
 
 	def volver(self, widget):
-		self.window.destroy()
-		self.__init__()
+		self.scrollNivel.destroy()
+		try:
+			self.vboxLogo.destroy()
+		except:
+			True
+		self.inicio()
 
 	def volver2(self, widget, nivel):
 		self.vboxLogo.destroy()
@@ -50,11 +72,21 @@ class Menu:
 		dialogo.run()
 		dialogo.destroy()
 
-	def enter_callback(self, widget, entry, respuesta, nivel):
+	def enter_callback(self, widget, entry, respuesta, nivel, pos, checked):
+		pos = pos - 1
 		entry_text = entry.get_text()
 		entry_text = entry_text.lower()
 		if entry_text in respuesta:
 			self.mensaje("¡Correcto!")
+			self.n.pop(pos)
+			self.n.insert(pos, "1")
+			arch = open("/home/" + usern + "/.config/freelogoquiz/n" + str(nivel) + ".txt", "w")
+			for i in self.n:
+				arch.write(str(i) + "\n")
+			arch.close()
+			pos = pos + 1
+			self.vboxLogo.destroy()
+			self.logo("clicked", nivel, pos, True)
 		else:
 			self.mensaje("¡Incorrecto!")
 
@@ -73,7 +105,7 @@ class Menu:
 		dialogo.run()
 		dialogo.destroy()
 
-	def logo(self, widget, nivel, logo):
+	def logo(self, widget, nivel, logo, checked):
 		self.scrollNivel.destroy()
 		self.tableNivel.destroy()
 
@@ -171,10 +203,10 @@ class Menu:
 				pista4 = "4. Multiplataforma"
 			elif logo == 16:
 				respuesta = "gnome"
-				pista1 = ""
-				pista2 = ""
-				pista3 = ""
-				pista4 = ""
+				pista1 = "1. Entorno de escritorio libre (GNU GPL/LGPL)"
+				pista2 = "2. Parte del proyecto GNU"
+				pista3 = "3. Iniciado por el mexicano Miguel de Icaza en 1999"
+				pista4 = "4. Utiliza la librería GTK+ para las interfaces gráficas"
 			elif logo == 17:
 				respuesta = "fedora"
 				pista1 = ""
@@ -576,7 +608,10 @@ class Menu:
 
 		#Cargando la imagen
 		self.image = gtk.Image()
-		self.image.set_from_file("logos/Grandes/Level" + str(nivel) + "/" + str(logo) + ".png")
+		if checked == True:
+			self.image.set_from_file("logos/Grandes/Level" + str(nivel) + "/checked/" + str(logo) + ".png")
+		elif checked == False:
+			self.image.set_from_file("logos/Grandes/Level" + str(nivel) + "/" + str(logo) + ".png")
 		self.image.show()
 		self.vboxLogo.pack_start(self.image)
 
@@ -585,7 +620,7 @@ class Menu:
 		self.vboxLogo.pack_start(self.hboxLogo, True, False, 0)
 
 		self.entry = gtk.Entry()
-		self.entry.connect("activate", self.enter_callback, self.entry, respuesta, nivel)
+		self.entry.connect("activate", self.enter_callback, self.entry, respuesta, nivel, logo, checked)
 		self.entry.show()
 		self.hboxLogo.pack_start(self.entry, True, True, 0)
 
@@ -613,17 +648,24 @@ class Menu:
 		#Determinando el nivel y las imágenes
 		if nivel == 1:
 			path = "logos/Pequeños/Level1/"
+			arch = open("/home/" + usern + "/.config/freelogoquiz/n1.txt")
 		elif nivel == 2:
 			path = "logos/Pequeños/Level2/"
+			arch = open("/home/" + usern + "/.config/freelogoquiz/n2.txt")
 		elif nivel == 3:
 			path = "logos/Pequeños/Level3/"
+			arch = open("/home/" + usern + "/.config/freelogoquiz/n3.txt")
 		elif nivel == 4:
 			path = "logos/Pequeños/Level4/"
+			arch = open("/home/" + usern + "/.config/freelogoquiz/n4.txt")
+
+		self.n = arch.read()
+		self.n = self.n.split("\n")
+		arch.close()
 
 		self.window.set_title("FreeLogoQuiz - Nivel" + str(nivel))
 
 		#Destuir los widgets que ya no se usan
-		self.scroll.destroy()
 		self.table.destroy()
 
 		#Scroll
@@ -641,186 +683,306 @@ class Menu:
 		self.scrollNivel.show()
 		self.tableNivel.show()
 
-		#Cargando las imágenes
+		#Cargando las imágenes y comprobando si ya ha sido acertado
 		self.image1 = gtk.Image()
-		self.image1.set_from_file(path + "1.png")
+		if self.n[0] == "1":
+			path1 = path + "checked/"
+			checked = True
+		else:
+			path1 = path
+			checked = False
+		self.image1.set_from_file(path1 + "1.png")
 		self.image1.show()
 		self.button = gtk.Button()
 		self.button.add(self.image1)
 		self.button.show()
 		self.tableNivel.attach(self.button, 0, 1, 0, 1)
-		self.button.connect("clicked", self.logo, nivel, 1)
+		self.button.connect("clicked", self.logo, nivel, 1, checked)
 
 		self.image2 = gtk.Image()
-		self.image2.set_from_file(path + "2.png")
+		if self.n[1] == "1":
+			path2 = path + "checked/"
+			checked = True
+		else:
+			path2 = path
+			checked = False
+		self.image2.set_from_file(path2 + "2.png")
 		self.image2.show()
 		self.button2 = gtk.Button()
 		self.button2.add(self.image2)
 		self.button2.show()
 		self.tableNivel.attach(self.button2, 1, 2, 0, 1)
-		self.button2.connect("clicked", self.logo, nivel, 2)
+		self.button2.connect("clicked", self.logo, nivel, 2, checked)
 
 		self.image3 = gtk.Image()
-		self.image3.set_from_file(path + "3.png")
+		if self.n[2] == "1":
+			path3 = path + "checked/"
+			checked = True
+		else:
+			path3 = path
+			checked = False
+		self.image3.set_from_file(path3 + "3.png")
 		self.image3.show()
 		self.button3 = gtk.Button()
 		self.button3.add(self.image3)
 		self.button3.show()
 		self.tableNivel.attach(self.button3, 2, 3, 0, 1)
-		self.button3.connect("clicked", self.logo, nivel, 3)
+		self.button3.connect("clicked", self.logo, nivel, 3, checked)
 
 		self.image4 = gtk.Image()
-		self.image4.set_from_file(path + "4.png")
+		if self.n[3] == "1":
+			path4 = path + "checked/"
+			checked = True
+		else:
+			path4 = path
+			checked = False
+		self.image4.set_from_file(path4 + "4.png")
 		self.image4.show()
 		self.button4 = gtk.Button()
 		self.button4.add(self.image4)
 		self.button4.show()
 		self.tableNivel.attach(self.button4, 3, 4, 0, 1)
-		self.button4.connect("clicked", self.logo, nivel, 4)
+		self.button4.connect("clicked", self.logo, nivel, 4, checked)
 
 		self.image5 = gtk.Image()
-		self.image5.set_from_file(path + "5.png")
+		if self.n[4] == "1":
+			path5 = path + "checked/"
+			checked = True
+		else:
+			path5 = path
+			checked = False
+		self.image5.set_from_file(path5 + "5.png")
 		self.image5.show()
 		self.button5 = gtk.Button()
 		self.button5.add(self.image5)
 		self.button5.show()
 		self.tableNivel.attach(self.button5, 0, 1, 1, 2)
-		self.button5.connect("clicked", self.logo, nivel, 5)
+		self.button5.connect("clicked", self.logo, nivel, 5, checked)
 
 		self.image6 = gtk.Image()
-		self.image6.set_from_file(path + "6.png")
+		if self.n[5] == "1":
+			path6 = path + "checked/"
+			checked = True
+		else:
+			path6 = path
+			checked = False
+		self.image6.set_from_file(path6 + "6.png")
 		self.image6.show()
 		self.button6 = gtk.Button()
 		self.button6.add(self.image6)
 		self.button6.show()
 		self.tableNivel.attach(self.button6, 1, 2, 1, 2)
-		self.button6.connect("clicked", self.logo, nivel, 6)
+		self.button6.connect("clicked", self.logo, nivel, 6, checked)
 
 		self.image7 = gtk.Image()
-		self.image7.set_from_file(path + "7.png")
+		if self.n[6] == "1":
+			path7 = path + "checked/"
+			checked = True
+		else:
+			path7 = path
+			checked = False
+		self.image7.set_from_file(path7 + "7.png")
 		self.image7.show()
 		self.button7 = gtk.Button()
 		self.button7.add(self.image7)
 		self.button7.show()
 		self.tableNivel.attach(self.button7, 2, 3, 1, 2)
-		self.button.connect("clicked", self.logo, nivel, 7)
+		self.button7.connect("clicked", self.logo, nivel, 7, checked)
 
 		self.image8 = gtk.Image()
-		self.image8.set_from_file(path + "8.png")
+		if self.n[7] == "1":
+			path8 = path + "checked/"
+			checked = True
+		else:
+			path8 = path
+			checked = False
+		self.image8.set_from_file(path8 + "8.png")
 		self.image8.show()
 		self.button8 = gtk.Button()
 		self.button8.add(self.image8)
 		self.button8.show()
 		self.tableNivel.attach(self.button8, 3, 4, 1, 2)
-		self.button8.connect("clicked", self.logo, nivel, 8)
+		self.button8.connect("clicked", self.logo, nivel, 8, checked)
 
 		self.image9 = gtk.Image()
-		self.image9.set_from_file(path + "9.png")
+		if self.n[8] == "1":
+			path9 = path + "checked/"
+			checked = True
+		else:
+			path9 = path
+			checked = False
+		self.image9.set_from_file(path9 + "9.png")
 		self.image9.show()
 		self.button9 = gtk.Button()
 		self.button9.add(self.image9)
 		self.button9.show()
 		self.tableNivel.attach(self.button9, 0, 1, 2, 3)
-		self.button9.connect("clicked", self.logo, nivel, 9)
+		self.button9.connect("clicked", self.logo, nivel, 9, checked)
 
 		self.image10 = gtk.Image()
-		self.image10.set_from_file(path + "10.png")
+		if self.n[9] == "1":
+			path10 = path + "checked/"
+			checked = True
+		else:
+			path10 = path
+			checked = False
+		self.image10.set_from_file(path10 + "10.png")
 		self.image10.show()
 		self.button10 = gtk.Button()
 		self.button10.add(self.image10)
 		self.button10.show()
 		self.tableNivel.attach(self.button10, 1, 2, 2, 3)
-		self.button10.connect("clicked", self.logo, nivel, 10)
+		self.button10.connect("clicked", self.logo, nivel, 10, checked)
 
 		self.image11 = gtk.Image()
-		self.image11.set_from_file(path + "11.png")
+		if self.n[10] == "1":
+			path11 = path + "checked/"
+			checked = True
+		else:
+			path11 = path
+			checked = False
+		self.image11.set_from_file(path11 + "11.png")
 		self.image11.show()
 		self.button11 = gtk.Button()
 		self.button11.add(self.image11)
 		self.button11.show()
 		self.tableNivel.attach(self.button11, 2, 3, 2, 3)
-		self.button11.connect("clicked", self.logo, nivel, 11)
+		self.button11.connect("clicked", self.logo, nivel, 11, checked)
 
 		self.image12 = gtk.Image()
-		self.image12.set_from_file(path + "12.png")
+		if self.n[11] == "1":
+			path12 = path + "checked/"
+			checked = True
+		else:
+			path12 = path
+			checked = False
+		self.image12.set_from_file(path12 + "12.png")
 		self.image12.show()
 		self.button12 = gtk.Button()
 		self.button12.add(self.image12)
 		self.button12.show()
 		self.tableNivel.attach(self.button12, 3, 4, 2, 3)
-		self.button12.connect("clicked", self.logo, nivel, 12)
+		self.button12.connect("clicked", self.logo, nivel, 12, checked)
 
 		self.image13 = gtk.Image()
-		self.image13.set_from_file(path + "13.png")
+		if self.n[12] == "1":
+			path13 = path + "checked/"
+			checked = True
+		else:
+			path13 = path
+			checked = False
+		self.image13.set_from_file(path13 + "13.png")
 		self.image13.show()
 		self.button13 = gtk.Button()
 		self.button13.add(self.image13)
 		self.button13.show()
 		self.tableNivel.attach(self.button13, 0, 1, 3, 4)
-		self.button13.connect("clicked", self.logo, nivel, 13)
+		self.button13.connect("clicked", self.logo, nivel, 13, checked)
 
 		self.image14 = gtk.Image()
-		self.image14.set_from_file(path + "14.png")
+		if self.n[13] == "1":
+			path14 = path + "checked/"
+			checked = True
+		else:
+			path14 = path
+			checked = False
+		self.image14.set_from_file(path14 + "14.png")
 		self.image14.show()
 		self.button14 = gtk.Button()
 		self.button14.add(self.image14)
 		self.button14.show()
 		self.tableNivel.attach(self.button14, 1, 2, 3, 4)
-		self.button14.connect("clicked", self.logo, nivel, 14)
+		self.button14.connect("clicked", self.logo, nivel, 14, checked)
 
 		self.image15 = gtk.Image()
-		self.image15.set_from_file(path + "15.png")
+		if self.n[14] == "1":
+			path15 = path + "checked/"
+			checked = True
+		else:
+			path15 = path
+			checked = False
+		self.image15.set_from_file(path15 + "15.png")
 		self.image15.show()
 		self.button15 = gtk.Button()
 		self.button15.add(self.image15)
 		self.button15.show()
 		self.tableNivel.attach(self.button15, 2, 3, 3, 4)
-		self.button15.connect("clicked", self.logo, nivel, 15)
+		self.button15.connect("clicked", self.logo, nivel, 15, checked)
 
 		self.image16 = gtk.Image()
-		self.image16.set_from_file(path + "16.png")
+		if self.n[15] == "1":
+			path16 = path + "checked/"
+			checked = True
+		else:
+			path16 = path
+			checked = False
+		self.image16.set_from_file(path16 + "16.png")
 		self.image16.show()
 		self.button16 = gtk.Button()
 		self.button16.add(self.image16)
 		self.button16.show()
 		self.tableNivel.attach(self.button16, 3, 4, 3, 4)
-		self.button16.connect("clicked", self.logo, nivel, 16)
+		self.button16.connect("clicked", self.logo, nivel, 16, checked)
 
 		self.image17 = gtk.Image()
-		self.image17.set_from_file(path + "17.png")
+		if self.n[16] == "1":
+			path17 = path + "checked/"
+			checked = True
+		else:
+			path17 = path
+			checked = False
+		self.image17.set_from_file(path17 + "17.png")
 		self.image17.show()
 		self.button17 = gtk.Button()
 		self.button17.add(self.image17)
 		self.button17.show()
 		self.tableNivel.attach(self.button17, 0, 1, 4, 5)
-		self.button17.connect("clicked", self.logo, nivel, 17)
+		self.button17.connect("clicked", self.logo, nivel, 17, checked)
 
 		self.image18 = gtk.Image()
-		self.image18.set_from_file(path + "18.png")
+		if self.n[17] == "1":
+			path18 = path + "checked/"
+			checked = True
+		else:
+			path18 = path
+			checked = False
+		self.image18.set_from_file(path18 + "18.png")
 		self.image18.show()
 		self.button18 = gtk.Button()
 		self.button18.add(self.image18)
 		self.button18.show()
 		self.tableNivel.attach(self.button18, 1, 2, 4, 5)
-		self.button18.connect("clicked", self.logo, nivel, 18)
+		self.button18.connect("clicked", self.logo, nivel, 18, checked)
 
 		self.image19 = gtk.Image()
-		self.image19.set_from_file(path + "19.png")
+		if self.n[18] == "1":
+			path19 = path + "checked/"
+			checked = True
+		else:
+			path19 = path
+			checked = False
+		self.image19.set_from_file(path19 + "19.png")
 		self.image19.show()
 		self.button19 = gtk.Button()
 		self.button19.add(self.image19)
 		self.button19.show()
 		self.tableNivel.attach(self.button19, 2, 3, 4, 5)
-		self.button19.connect("clicked", self.logo, nivel, 19)
+		self.button19.connect("clicked", self.logo, nivel, 19, checked)
 
 		self.image20 = gtk.Image()
-		self.image20.set_from_file(path + "20.png")
+		if self.n[19] == "1":
+			path20 = path + "checked/"
+			checked = True
+		else:
+			path20 = path
+			checked = False
+		self.image20.set_from_file(path20 + "20.png")
 		self.image20.show()
 		self.button20 = gtk.Button()
 		self.button20.add(self.image20)
 		self.button20.show()
 		self.tableNivel.attach(self.button20, 3, 4, 4, 5)
-		self.button20.connect("clicked", self.logo, nivel, 20)
+		self.button20.connect("clicked", self.logo, nivel, 20, checked)
 
 		#Botón atrás
 		self.atras = gtk.Button("Volver a selección de niveles")
@@ -837,25 +999,20 @@ class Menu:
 		self.window.set_default_size(800,550)
 		self.window.set_position(gtk.WIN_POS_CENTER)
 		self.window.show()
+		self.inicio()
 
-		#Scroll
-		self.scroll = gtk.ScrolledWindow()
-		self.scroll.set_border_width(0)
-		self.scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_ALWAYS)
-		self.window.add(self.scroll)
-
+	def inicio(self):
 		#Table
 		self.table = gtk.Table(1, 4, False)
 		self.table.set_row_spacings(10)
 		self.table.set_col_spacings(0)
 
-		self.scroll.add_with_viewport(self.table)
-		self.scroll.show()
+		self.window.add(self.table)
 		self.table.show()
 
 		#Botones de niveles
 		#Level1
-		self.level1 = gtk.Button("Nivel 1\nLogos " + str(completados1) + "/20")
+		self.level1 = gtk.Button("Nivel 1\nLogos " + str(completados(1)) + "/20")
 		self.level1.connect("clicked", self.nivel, 1)
 
 		self.mapa1 = self.level1.get_colormap() 
@@ -879,7 +1036,7 @@ class Menu:
 		self.table.attach(self.level1, 0, 1, 0, 1)
 
 		#Level2
-		self.level2 = gtk.Button("Nivel 2\nLogos " + str(completados2) + "/20")
+		self.level2 = gtk.Button("Nivel 2\nLogos " + str(completados(2)) + "/20")
 		self.level2.connect("clicked", self.nivel, 2)
 
 		self.mapa2 = self.level2.get_colormap()
@@ -903,7 +1060,7 @@ class Menu:
 		self.table.attach(self.level2, 0, 1, 1, 2)
 
 		#Level3
-		self.level3 = gtk.Button("Nivel 3\nLogos " + str(completados3) + "/20")
+		self.level3 = gtk.Button("Nivel 3\nLogos " + str(completados(3)) + "/20")
 		self.level3.connect("clicked", self.nivel, 3)
 
 		self.mapa3 = self.level3.get_colormap()
@@ -927,7 +1084,7 @@ class Menu:
 		self.table.attach(self.level3, 0, 1, 2, 3)
 
 		#Level4
-		self.level4 = gtk.Button("Nivel 4\n Logos " + str(completados4) + "/20")
+		self.level4 = gtk.Button("Nivel 4\n Logos " + str(completados(4)) + "/20")
 		self.level4.connect("clicked", self.nivel, 4)
 
 		self.mapa4 = self.level4.get_colormap()

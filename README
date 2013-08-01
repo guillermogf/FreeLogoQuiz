@@ -1,4 +1,4 @@
-FreeLogoQuiz v0.1
+FreeLogoQuiz v0.2
 Autor: Guillermo Gómez Fonfría
 Email: guillermo.gomezfonfria@gmail.com
 
@@ -28,14 +28,22 @@ Los archivos de los que se compone esta versión son:
  * COPYING -- Un documento que incluye una copia del texto de todas las
 licencias utilizadas
 
+Los archivos que crea y utiliza este programa en el sistema son:
+ - ~/.config/freelogoquiz
+ |- ~/.config/freelogoquiz/n1.txt -- Logos acertados del nivel 1
+ |- ~/.config/freelogoquiz/n2.txt -- Logos acertados del nivel 2
+ |- ~/.config/freelogoquiz/n3.txt -- Logos acertados del nivel 3
+ |- ~/.config/freelogoquiz/n4.txt -- Logos acertados del nivel 4
 
-Características de la versión 
+
+Características de la versión:
  * 80 logos de diferentes proyectos en 4 niveles.
  * El nombre de todos los logos está reconocido.
- * 15 logos contienen 4 pistas cada uno
+ * 16 logos contienen 4 pistas cada uno.
+ * Guardar los logos ya acertados.
+ * Maracar con 'ticks' los logos acertados.
+ * Transición al menú de selección de niveles mejorada.
 
-Características a mejorar/implementar
- * Opción que guarde todos los logos ya acertados.
- * Logos acertados marcados con 'ticks'.
- * Mejorar la transición al menú de selección de niveles.
+Características a mejorar/implementar:
+ * Opción que elimine los datos guardados.
  * Añadir pistas para todos los logos.
