@@ -1,0 +1,41 @@
+FreeLogoQuiz v0.1
+Autor: Guillermo Gómez Fonfría
+Email: guillermo.gomezfonfria@gmail.com
+
+FreeLogoQuiz es una juego sencillo creado para probar la librería pyGTK.
+Intenta ser un clon del popular juego para Android conocido como LogosQuiz,
+pero usando logos de únicamente proyectos de software libre o relacionados con
+la comunidad de cultura libre en general.
+
+REQUISITOS
+Los requisitos son los siguientes:
+ * Python 2.7 con pyGTK 2.0 instalados
+
+EJECUCIÓN
+Para ejecutar este programa necesitas darle permisos de ejecución:
+$ chmod +x FreeLogoQuiz.py
+Y posteriormente ejecutarlo:
+$ ./FreeLogoQuiz.py
+Si esto diese problemas puede probar con:
+$ python FreeLogoQuiz.py
+
+
+Los archivos de los que se compone esta versión son:
+ * FreeLogoQuiz.py -- El programa
+ * logos -- Un directorio con todos los logos usados por el programa
+ * README -- Este documento
+ * LICENSE -- Un documento que explica la(s) licencias utilizadas
+ * COPYING -- Un documento que incluye una copia del texto de todas las
+licencias utilizadas
+
+
+Características de la versión 
+ * 80 logos de diferentes proyectos en 4 niveles.
+ * El nombre de todos los logos está reconocido.
+ * 15 logos contienen 4 pistas cada uno
+
+Características a mejorar/implementar
+ * Opción que guarde todos los logos ya acertados.
+ * Logos acertados marcados con 'ticks'.
+ * Mejorar la transición al menú de selección de niveles.
+ * Añadir pistas para todos los logos.
