@@ -1,49 +1,46 @@
 FreeLogoQuiz v0.2
-Autor: Guillermo Gómez Fonfría
+Author: Guillermo Gómez Fonfría
 Email: guillermo.gomezfonfria@gmail.com
 
-FreeLogoQuiz es una juego sencillo creado para probar la librería pyGTK.
-Intenta ser un clon del popular juego para Android conocido como LogosQuiz,
-pero usando logos de únicamente proyectos de software libre o relacionados con
-la comunidad de cultura libre en general.
+FreeLogoQuiz is a simple game that was created to test pyGTK
+It is a clone to the popular Android game Logos Quiz, but only using logos of
+free software projects or related to the free culture movement.
 
-REQUISITOS
-Los requisitos son los siguientes:
- * Python 2.7 con pyGTK 2.0 instalados
+REQUIREMENTS
+ * Python 2.7 with pyGTK 2.0 installed
 
-EJECUCIÓN
-Para ejecutar este programa necesitas darle permisos de ejecución:
+RUN THE PROGRAM
+To run the application you need to make it executable:
 $ chmod +x FreeLogoQuiz.py
-Y posteriormente ejecutarlo:
+And then run it
 $ ./FreeLogoQuiz.py
-Si esto diese problemas puede probar con:
+If that didn't work try this:
 $ python FreeLogoQuiz.py
 
+FILES
+This version has the following files:
+ * FreeLogoQuiz.py -- The program
+ * logos -- All logos used by the program
+ * README -- This document
+ * README-ES -- This document in Spanish
+ * COPYING -- A document explaining the license.
+ * LICENSE -- A copy of GNU GPL
 
-Los archivos de los que se compone esta versión son:
- * FreeLogoQuiz.py -- El programa
- * logos -- Un directorio con todos los logos usados por el programa
- * README -- Este documento
- * LICENSE -- Un documento que explica la(s) licencias utilizadas
- * COPYING -- Un documento que incluye una copia del texto de todas las
-licencias utilizadas
-
-Los archivos que crea y utiliza este programa en el sistema son:
+The following are the files this program uses to save information:
  - ~/.config/freelogoquiz
- |- ~/.config/freelogoquiz/n1.txt -- Logos acertados del nivel 1
- |- ~/.config/freelogoquiz/n2.txt -- Logos acertados del nivel 2
- |- ~/.config/freelogoquiz/n3.txt -- Logos acertados del nivel 3
- |- ~/.config/freelogoquiz/n4.txt -- Logos acertados del nivel 4
+ |- ~/.config/freelogoquiz/n1.txt -- Level 1 logos
+ |- ~/.config/freelogoquiz/n2.txt -- Level 2 logos
+ |- ~/.config/freelogoquiz/n3.txt -- Level 3 logos
+ |- ~/.config/freelogoquiz/n4.txt -- Level 4 logos
 
 
-Características de la versión:
- * 80 logos de diferentes proyectos en 4 niveles.
- * El nombre de todos los logos está reconocido.
- * 16 logos contienen 4 pistas cada uno.
- * Guardar los logos ya acertados.
- * Maracar con 'ticks' los logos acertados.
- * Transición al menú de selección de niveles mejorada.
+FEATURES
+Features:
+ * 80 logos of different projects in 4 levels.
+ * 16 logos have 4 tips each one.
+ * Save the logos already guessed.
+ * Tick guessed logos.
 
-Características a mejorar/implementar:
- * Opción que elimine los datos guardados.
- * Añadir pistas para todos los logos.
+Future features:
+ * Option to remove save data.
+ * Add tips for every logo.
