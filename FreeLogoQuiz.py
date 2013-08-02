@@ -1,15 +1,47 @@
 #!/usr/bin/python
 # coding: utf-8
 
+# Copyright (C) 2013 Guillermo Gómez Fonfría
+#<guillermo.gomezfonfria@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see {http://www.gnu.org/licenses/}.
+
+#Versión
+version = "0.2"
+
 import pygtk
 pygtk.require("2.0")
 import gtk
 
 from commands import getoutput
 from os import system
+from sys import argv
+from sys import exit
 
 #nombre de usuario
 usern = getoutput("logname")
+
+#Argumentos
+for i in argv:
+	if i in ("-v", "--version", "-version"):
+		print("FreeLogoQuiz " + version)
+		print("Copyright © 2013 Guillermo Gómez Fonfría")
+		print("Licencia GPLv3: GNU GPL versión 3")
+		print("Esto es software libre: usted es libre de cambiarlo y redistribuirlo.\nNo hay NINGUNA GARANTÍA, hasta donde permite la ley.")
+		print("<http://gnu.org/licenses/gpl.html>")
+		exit()
+		
 
 #Archivos con la configuración
 if getoutput("mkdir ~/.config/freelogoquiz") == "":
