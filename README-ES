@@ -19,7 +19,13 @@ $ ./FreeLogoQuiz.py
 Si esto diese problemas puede probar con:
 $ python FreeLogoQuiz.py
 
+VOLVER A EMPEZAR
+Si quieres volver a empezar haciendo que el juego olvide los logos que has
+acertado tienes que eliminar el directorio ~/.config/freelogoquiz
+$ cd ~/.config
+$ rm -r freelogoquiz
 
+ARCHIVOS
 Los archivos de los que se compone esta versión son:
  * FreeLogoQuiz.py -- El programa
  * logos -- Un directorio con todos los logos usados por el programa

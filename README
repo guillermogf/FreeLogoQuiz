@@ -17,6 +17,12 @@ $ ./FreeLogoQuiz.py
 If that didn't work try this:
 $ python FreeLogoQuiz.py
 
+START AGAIN
+If you want to start again and make the program forget which logos you have
+already you guess, you will have to remove the folder ~/.config/freelogoquiz
+$ cd ~/.config
+$ rm -r freelogoquiz
+
 FILES
 This version has the following files:
  * FreeLogoQuiz.py -- The program
