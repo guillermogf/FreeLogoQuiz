@@ -44,23 +44,24 @@ for i in argv:
 		
 
 #Archivos con la configuración
-if getoutput("mkdir ~/.config/freelogoquiz") == "":
-	num = 0
-	while num < 20:
-		system("echo 0 >> ~/.config/freelogoquiz/n1.txt")
-		num = num + 1
-	num = 0
-	while num < 20:
-		system("echo 0 >> ~/.config/freelogoquiz/n2.txt")
-		num = num + 1
-	num = 0
-	while num < 20:
-		system("echo 0 >> ~/.config/freelogoquiz/n3.txt")
-		num = num + 1
-	num = 0
-	while num < 20:
-		system("echo 0 >> ~/.config/freelogoquiz/n4.txt")
-		num = num + 1
+def datos():
+	if getoutput("mkdir ~/.config/freelogoquiz") == "":
+		num = 0
+		while num < 20:
+			system("echo 0 >> ~/.config/freelogoquiz/n1.txt")
+			num = num + 1
+		num = 0
+		while num < 20:
+			system("echo 0 >> ~/.config/freelogoquiz/n2.txt")
+			num = num + 1
+		num = 0
+		while num < 20:
+			system("echo 0 >> ~/.config/freelogoquiz/n3.txt")
+			num = num + 1
+		num = 0
+		while num < 20:
+			system("echo 0 >> ~/.config/freelogoquiz/n4.txt")
+			num = num + 1
 
 def completados(nivel):
 	arch = open("/home/" + usern + "/.config/freelogoquiz/n" + str(nivel) + ".txt")
@@ -90,6 +91,13 @@ class Menu:
 	def volver2(self, widget, nivel):
 		self.vboxLogo.destroy()
 		self.nivel(self.nivel, nivel)
+
+	def delete_data(self, widget):
+		system("rm -r ~/.config/freelogoquiz")
+		self.table.destroy()
+		datos()
+		self.inicio()
+		
 
 	def delete_event(self, widget, event, data=None):
 		gtk.main_quit()
@@ -1035,7 +1043,7 @@ class Menu:
 
 	def inicio(self):
 		#Table
-		self.table = gtk.Table(1, 4, False)
+		self.table = gtk.Table(1, 5, False)
 		self.table.set_row_spacings(10)
 		self.table.set_col_spacings(0)
 
@@ -1139,11 +1147,16 @@ class Menu:
 		self.level4.show()
 		self.table.attach(self.level4, 0, 1, 3, 4)
 
+		self.eliminar_datos = gtk.Button("Eliminar datos guardados")
+		self.eliminar_datos.connect("clicked", self.delete_data)
+		self.eliminar_datos.show()
+		self.table.attach(self.eliminar_datos, 0, 1, 4, 5)
 
 def main():
 	gtk.main()
 	return 0
 
 if __name__ == "__main__":
+	datos()
 	Menu()
 	main()
