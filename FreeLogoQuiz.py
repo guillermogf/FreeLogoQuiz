@@ -2,7 +2,7 @@
 # coding: utf-8
 
 # Copyright (C) 2013 Guillermo Gómez Fonfría
-#<guillermo.gomezfonfria@gmail.com>
+#<guillermo.gf@openmailbox.org>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,8 +26,7 @@ import gtk
 
 from commands import getoutput
 from os import system
-from sys import argv
-from sys import exit
+from sys import argv, exit
 
 #nombre de usuario
 usern = getoutput("logname")
