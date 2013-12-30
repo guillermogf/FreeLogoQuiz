@@ -33,6 +33,7 @@ Los archivos de los que se compone esta versión son:
  * README-ES -- Este documento
  * COPYING -- Un documento que explica la(s) licencias utilizadas
  * LICENSE -- Una copia de la GPL de GNU
+ * Changelog -- Un diario con entradas de cada cambio introducido en el código
 
 Los archivos que crea y utiliza este programa en el sistema son:
  - ~/.config/freelogoquiz

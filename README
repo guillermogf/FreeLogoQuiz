@@ -31,6 +31,7 @@ This version has the following files:
  * README-ES -- This document in Spanish
  * COPYING -- A document explaining the license.
  * LICENSE -- A copy of GNU GPL
+ * Changelog -- A journal with entries related to code changes and new features
 
 The following are the files this program uses to save information:
  - ~/.config/freelogoquiz
