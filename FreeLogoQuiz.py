@@ -36,8 +36,8 @@ for i in argv:
         print("FreeLogoQuiz " + version)
         print("Copyright © 2013 Guillermo Gómez Fonfría")
         print("Licencia GPLv3: GNU GPL versión 3")
-        print("Esto es software libre: usted es libre de cambiarlo y " +
-              "redistribuirlo.\nNo hay NINGUNA GARANTÍA, hasta donde " +
+        print("Esto es software libre: usted es libre de cambiarlo y "
+              "redistribuirlo.\nNo hay NINGUNA GARANTÍA, hasta donde "
               "permite la ley.")
         print("<http://gnu.org/licenses/gpl.html>")
         exit()
@@ -161,14 +161,14 @@ class Menu:
                 pista1 = "1. Suite ofimática libre (licencia Apache 2.0)"
                 pista2 = "2. Proyecto iniciado por Sun Microsystems"
                 pista3 = "3. Proyecto donado por Oracle a la Apache Foundation"
-                pista4 = ("4. La comunidad inició un proyecto paralelo " +
+                pista4 = ("4. La comunidad inició un proyecto paralelo "
                           "independiente en 2010")
             elif logo == 2:
                 respuesta = "wikipedia"
                 pista1 = "1. Enciclopedia creada por Jimbo Wales en 2001"
                 pista2 = "2. Inicialemente llamado Nupedia"
                 pista3 = "3. Mantenido por una amplia comunidad"
-                pista4 = ("4. Contenido publicado bajo licencias Creative " +
+                pista4 = ("4. Contenido publicado bajo licencias Creative "
                           "Commons")
             elif logo == 3:
                 respuesta = "libreoffice"
@@ -181,31 +181,31 @@ class Menu:
                 pista1 = "1. Reproductor multimedia libre (GNU GPL)"
                 pista2 = "2. Desarrollado por VideoLAN"
                 pista3 = "3. Proyecto iniciado en 1996 y liberado en 2001"
-                pista4 = ("4. Recientemente se ha publicado versión para " +
+                pista4 = ("4. Recientemente se ha publicado versión para "
                           "Android")
             elif logo == 5:
                 respuesta = "chromium"
                 pista1 = "1. Navegador libre (licencia BSD)"
-                pista2 = ("2. Desarrollado a partir del código fuente del " +
+                pista2 = ("2. Desarrollado a partir del código fuente del "
                           "navegador Chrome liberado por Google")
                 pista3 = "3. Es multiplataforma"
                 pista4 = "4. Programado en C++ y ensamblador"
             elif logo == 6:
                 respuesta = "kde"
-                pista1 = ("1. Entorno de escritorio libre (GNU GPL, " +
+                pista1 = ("1. Entorno de escritorio libre (GNU GPL, "
                           "GNU LGPL, licencia BSD,...)")
                 pista2 = "2. Utiliza Qt para las interfaces gráficas"
                 pista3 = "3. Iniciado en 1996 para sistemas Unix"
-                pista4 = ("4. Las mascotas del proyecto son Konqui (actual)" +
-                          " y Kandalf ")
+                pista4 = ("4. Las mascotas del proyecto son Konqui (actual) "
+                          "y Kandalf ")
             elif logo == 7:
                 respuesta = "creative commons"
-                pista1 = ("1. Licencias publicadas y defendidas por la " +
+                pista1 = ("1. Licencias publicadas y defendidas por la "
                           "fundación homónima")
-                pista2 = ("2. Licencias principalmente utilizadas en textos" +
-                          " y gráficos")
+                pista2 = ("2. Licencias principalmente utilizadas en textos "
+                          "y gráficos")
                 pista3 = "3. Usadas por Wikipedia"
-                pista4 = ("4. El único requisito que comparten todas es " +
+                pista4 = ("4. El único requisito que comparten todas es "
                           "indicar el autor")
             elif logo == 8:
                 respuesta = "linux", "tux"
@@ -215,32 +215,33 @@ class Menu:
                 pista4 = "4. Es el núcleo que usan más distribuciones libres"
             elif logo == 9:
                 respuesta = "android"
-                pista1 = ("1. Sistema Operativo libre (licencia Apache y GNU" +
-                          " GPL)")
-                pista2 = ("2. Desarrollado por un grupo de empresas " +
+                pista1 = ("1. Sistema Operativo libre (licencia Apache y GNU "
+                          "GPL)")
+                pista2 = ("2. Desarrollado por un grupo de empresas "
                           "lideradas por Google")
                 pista3 = "3. Iniciado en 2005"
                 pista4 = "4. La mascota es Andy"
             elif logo == 10:
                 respuesta = "ubuntu"
-                pista1 = "1. Distribución GNU/Linux libre (GNU GPL)"
-                pista2 = "2. Desarrollado por Canonical"
+                pista1 = ("1. Distribución GNU/Linux libre (GNU GPL) derivada"
+                          "de Debian.")
+                pista2 = "2. Desarrollado por Canonical."
                 pista3 = "3. Se publica una nueva versión cada seis meses."
-                pista4 = "4. Distribución GNU/Linux más popular"
+                pista4 = "4. Una de las distribuciones GNU/Linux más usadas."
             elif logo == 11:
                 respuesta = "gnu"
-                pista1 = ("1. Proyecto creado con el objetivo de crear un" +
-                          " SO completamente libre")
+                pista1 = ("1. Proyecto creado con el objetivo de crear un"
+                          "SO completamente libre")
                 pista2 = "2. Proyecto iniciado por Richard Stallman en 1983"
                 pista3 = "3. Basado en la arquitectura de Unix"
-                pista4 = ("4. Se creó la licencia GPL para asegurar la " +
+                pista4 = ("4. Se creó la licencia GPL para asegurar la "
                           "libertad de los usuarios")
             elif logo == 12:
                 respuesta = "audacity"
                 pista1 = "1. Editor y grabador de audio libre (GNU GPL)"
                 pista2 = "2. Creado en 1999 y publicado el 2000"
                 pista3 = "3. Gran soporte de formatos"
-                pista4 = ("4. Aplicación de su tipo más popular en sistemas" +
+                pista4 = ("4. Aplicación de su tipo más popular en sistemas"
                           "GNU/Linux")
             elif logo == 13:
                 respuesta = "calibre"
@@ -257,7 +258,7 @@ class Menu:
             elif logo == 15:
                 respuesta = "inkscape"
                 pista1 = "1. Editor de gráficos vectoriales libre (GNU GPL)7"
-                pista2 = ("2. Utiliza el formato SVG y permite la " +
+                pista2 = ("2. Utiliza el formato SVG y permite la "
                           "exportación e importación de otros")
                 pista3 = "3. Iniciado en 2006"
                 pista4 = "4. Multiplataforma"
@@ -266,7 +267,7 @@ class Menu:
                 pista1 = "1. Entorno de escritorio libre (GNU GPL/LGPL)"
                 pista2 = "2. Parte del proyecto GNU"
                 pista3 = "3. Iniciado por el mexicano Miguel de Icaza en 1999"
-                pista4 = ("4. Utiliza la librería GTK+ para las interfaces" +
+                pista4 = ("4. Utiliza la librería GTK+ para las interfaces"
                           " gráficas")
             elif logo == 17:
                 respuesta = "fedora"
@@ -652,7 +653,7 @@ class Menu:
                 pista3 = ""
                 pista4 = ""
             elif logo == 19:
-                respuesta = "openarena"
+                respuesta = ("openarena", "open arena")
                 pista1 = ""
                 pista2 = ""
                 pista3 = ""
