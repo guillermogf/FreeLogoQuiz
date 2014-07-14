@@ -19,12 +19,6 @@ $ ./FreeLogoQuiz.py
 Si esto diese problemas puede probar con:
 $ python FreeLogoQuiz.py
 
-VOLVER A EMPEZAR
-Si quieres volver a empezar haciendo que el juego olvide los logos que has
-acertado tienes que eliminar el directorio ~/.config/freelogoquiz
-$ cd ~/.config
-$ rm -r freelogoquiz
-
 ARCHIVOS
 Los archivos de los que se compone esta versión son:
  * FreeLogoQuiz.py -- El programa
@@ -33,7 +27,6 @@ Los archivos de los que se compone esta versión son:
  * README-ES -- Este documento
  * COPYING -- Un documento que explica la(s) licencias utilizadas
  * LICENSE -- Una copia de la GPL de GNU
- * Changelog -- Un diario con entradas de cada cambio introducido en el código
 
 Los archivos que crea y utiliza este programa en el sistema son:
  - ~/.config/freelogoquiz
@@ -53,5 +46,4 @@ Características de la versión:
  * Transición al menú de selección de niveles mejorada.
 
 Características a mejorar/implementar:
- * Opción que elimine los datos guardados.
  * Añadir pistas para todos los logos.

@@ -17,12 +17,6 @@ $ ./FreeLogoQuiz.py
 If that didn't work try this:
 $ python FreeLogoQuiz.py
 
-START AGAIN
-If you want to start again and make the program forget which logos you have
-already you guess, you will have to remove the folder ~/.config/freelogoquiz
-$ cd ~/.config
-$ rm -r freelogoquiz
-
 FILES
 This version has the following files:
  * FreeLogoQuiz.py -- The program
@@ -31,7 +25,6 @@ This version has the following files:
  * README-ES -- This document in Spanish
  * COPYING -- A document explaining the license.
  * LICENSE -- A copy of GNU GPL
- * Changelog -- A journal with entries related to code changes and new features
 
 The following are the files this program uses to save information:
  - ~/.config/freelogoquiz
@@ -49,5 +42,4 @@ Features:
  * Tick guessed logos.
 
 Future features:
- * Option to remove save data.
  * Add tips for every logo.
